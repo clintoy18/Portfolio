@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import AboutMe from "./components/AboutMe";
+// import AboutMe from "./components/AboutMe";
 
 // Lazy load heavy sections
 const TechStack = React.lazy(() => import("./components/Skills"));
@@ -35,7 +35,7 @@ const App: React.FC = () => {
           <Projects />
         </Suspense>
 
-              <AboutMe />
+         {/* <AboutMe /> */}
         <Contact />
       </main>
 

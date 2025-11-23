@@ -69,20 +69,21 @@ const Hero: React.FC = () => {
         </motion.div>
 
         {/* Right: Profile Image */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="md:w-1/2 flex justify-center mb-8 md:mb-0"
-        >
-          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg">
-            <img
-              src="/path-to-your-photo.jpg"
-              alt="Clint Alonzo"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </motion.div>
+     <motion.div
+  initial={{ opacity: 0, x: 30 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 1 }}
+  className="md:w-1/2 flex justify-center mb-8 md:mb-0"
+>
+  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
+    <img
+      src="https://thriftit-bucket-s3.s3.ap-southeast-1.amazonaws.com/alonzo8r.JPG"
+      alt="Clint Alonzo"
+      className="w-full h-full object-cover"
+    />
+  </div>
+</motion.div>
+
       </div>
     </section>
   );
