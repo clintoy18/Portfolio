@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
       {/* Background blobs (optional) */}
       <div className="absolute inset-0 -z-10">
         <motion.div
@@ -51,14 +51,13 @@ const Hero: React.FC = () => {
         >
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
             Hi, I’m Clint
-       
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6">
-            Full-Stack{" "}
-                 <span className="text-blue-500">{typed}</span>
+            Full-Stack <span className="text-blue-500">{typed}</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 mb-6">
-            Passionate about building modern applications and digital solutions that make a real impact.
+            Passionate about building modern applications and digital solutions
+            that make a real impact.
           </p>
           <a
             href="#projects"
@@ -69,21 +68,20 @@ const Hero: React.FC = () => {
         </motion.div>
 
         {/* Right: Profile Image */}
-     <motion.div
-  initial={{ opacity: 0, x: 30 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 1 }}
-  className="md:w-1/2 flex justify-center mb-8 md:mb-0"
->
-  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
-    <img
-      src="https://thriftit-bucket-s3.s3.ap-southeast-1.amazonaws.com/alonzo8r.JPG"
-      alt="Clint Alonzo"
-      className="w-full h-full object-cover"
-    />
-  </div>
-</motion.div>
-
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          className="md:w-1/2 flex justify-center mb-8 md:mb-0"
+        >
+          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
+            <img
+              src="https://thriftit-bucket-s3.s3.ap-southeast-1.amazonaws.com/alonzo8r.JPG"
+              alt="Clint Alonzo"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

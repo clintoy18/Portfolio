@@ -24,14 +24,25 @@ const Navbar: React.FC = () => {
     { href: "#contact", label: "Contact", preload: preloadContact },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+
+  const element = document.querySelector(href);
+  if (!element) return;
+
+  // Close mobile menu AFTER a short delay to allow scroll to start
+  if (isMobileMenuOpen) {
     setIsMobileMenuOpen(false);
-  };
+
+    // Small delay so the menu closes smoothly AFTER scroll begins
+    setTimeout(() => {
+      element.scrollIntoView({ behavior: "smooth" });
+    }, 100); // 100ms is enough for most animations
+  } else {
+    // Desktop: scroll immediately
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
   return (
     <motion.nav
