@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { href: "#hero", label: "Home" },                                 // no preload
+    { href: "#hero", label: "Home" },                             
     { href: "#skills", label: "Tech Stack", preload: preloadTechStack },
     { href: "#projects", label: "Projects", preload: preloadProjects },
     { href: "#contact", label: "Contact", preload: preloadContact },
@@ -37,7 +37,7 @@ const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) =>
     // Small delay so the menu closes smoothly AFTER scroll begins
     setTimeout(() => {
       element.scrollIntoView({ behavior: "smooth" });
-    }, 100); // 100ms is enough for most animations
+    }, 100); 
   } else {
     // Desktop: scroll immediately
     element.scrollIntoView({ behavior: "smooth" });
