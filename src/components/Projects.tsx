@@ -190,21 +190,17 @@ Because style shouldn’t cost the planet.`,
       "JWT authentication & structured logging with Serilog",
     ],
   },
-    {
+  {
     id: "UC-CSS Sit-In Monitoring System",
     title: "Sit-In Monitoring System",
-    subtitle: "A school project using Vanilla PHP and JavaScript designed for the College of Computer Studies.",
+    subtitle:
+      "A school project using Vanilla PHP and JavaScript designed for the College of Computer Studies.",
     shortDesc:
       "It manages and monitors student sit-in sessions, offering features like room reservations, session tracking, and feedback management for both admins and students.",
-    tech: [
-      "PHP ",
-      "JavaScript ",
-      "MySQL ",
-      "Tailwind",
-      "GitHub",
-    ],
+    tech: ["PHP ", "JavaScript ", "MySQL ", "Tailwind", "GitHub"],
     liveUrl: "https://your-live-url.com",
-    githubUrl: "https://github.com/clintoy18/CCS-Sitting-Monitoring-System---PHP",
+    githubUrl:
+      "https://github.com/clintoy18/CCS-Sitting-Monitoring-System---PHP",
     coverImage:
       "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/cover.jpg",
     gallery: [
@@ -274,14 +270,19 @@ export default function Projects() {
                     {featuredProject.shortDesc}
                   </p>
                   <div className="flex flex-wrap gap-3 mb-8">
-                    {featuredProject.tech.map((t) => (
+                    {featuredProject.tech.slice(0, 3).map((t) => (
                       <span
                         key={t}
-                        className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium"
+                        className="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full"
                       >
                         {t}
                       </span>
                     ))}
+                    {featuredProject.tech.length > 3 && (
+                      <span className="text-xs text-gray-500">
+                        +{featuredProject.tech.length - 3}
+                      </span>
+                    )}
                   </div>
                   <p className="text-lg font-semibold text-blue-600 flex items-center gap-2">
                     Click to see how we helped Cebu in 24 hours
