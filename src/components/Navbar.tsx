@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 // Preload sections (only for links that have them)
-const preloadTechStack = () => import("./Skills");   // make sure these match your actual filenames
+const preloadTechStack = () => import("./Skills"); // make sure these match your actual filenames
 const preloadProjects = () => import("./Projects");
 const preloadContact = () => import("./Contact");
 
@@ -18,31 +18,34 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { href: "#hero", label: "Home" },                             
+    { href: "#hero", label: "Home" },
     { href: "#skills", label: "Tech Stack", preload: preloadTechStack },
     { href: "#projects", label: "Projects", preload: preloadProjects },
     { href: "#contact", label: "Contact", preload: preloadContact },
   ];
 
-const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-  e.preventDefault();
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
 
-  const element = document.querySelector(href);
-  if (!element) return;
+    const element = document.querySelector(href);
+    if (!element) return;
 
-  // Close mobile menu AFTER a short delay to allow scroll to start
-  if (isMobileMenuOpen) {
-    setIsMobileMenuOpen(false);
+    // Close mobile menu AFTER a short delay to allow scroll to start
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
 
-    // Small delay so the menu closes smoothly AFTER scroll begins
-    setTimeout(() => {
+      // Small delay so the menu closes smoothly AFTER scroll begins
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      // Desktop: scroll immediately
       element.scrollIntoView({ behavior: "smooth" });
-    }, 100); 
-  } else {
-    // Desktop: scroll immediately
-    element.scrollIntoView({ behavior: "smooth" });
-  }
-};
+    }
+  };
 
   return (
     <motion.nav
@@ -55,7 +58,7 @@ const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) =>
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto max-w-5xl px-6 sm:px-8 lg:px-12 py-6">
+      <div className="mx-auto max-w-5xl px-4 py-3 sm:px-6 sm:py-5 lg:px-10 lg:py-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <a
@@ -92,14 +95,35 @@ const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) =>
             className="md:hidden p-3 rounded-xl hover:bg-white/30 transition"
             aria-label="Toggle menu"
           >
-            <motion.div animate={{ rotate: isMobileMenuOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+            <motion.div
+              animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
               {isMobileMenuOpen ? (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               ) : (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
               )}
             </motion.div>
