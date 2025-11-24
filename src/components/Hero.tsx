@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Github, Linkedin } from "lucide-react";
 
 const Hero: React.FC = () => {
-  const role = "Developer"; //looping role
+  const role = "Developer";
   const [typed, setTyped] = useState("");
 
   useEffect(() => {
@@ -25,8 +26,11 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden">
-      {/* Background blobs (optional) */}
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden"
+    >
+      {/* Animated Blobs */}
       <div className="absolute inset-0 -z-10">
         <motion.div
           animate={{ x: [-100, 100, -100], y: [-50, 80, -50] }}
@@ -40,9 +44,9 @@ const Hero: React.FC = () => {
         />
       </div>
 
-      {/* Two-column layout */}
+      {/* Main layout */}
       <div className="container mx-auto flex flex-col-reverse md:flex-row items-center px-6 md:px-12">
-        {/* Left: Text */}
+        {/* Left side */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -52,22 +56,45 @@ const Hero: React.FC = () => {
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
             Hi, I’m Clint
           </h1>
+
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6">
             Full-Stack <span className="text-blue-500">{typed}</span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 mb-6">
+
+          <p className="text-lg md:text-xl text-gray-600 mb-8">
             Passionate about building modern applications and digital solutions
             that make a real impact.
           </p>
-          <a
-            href="#projects"
-            className="inline-block px-6 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-all duration-300"
-          >
-            View Work
-          </a>
+
+          {/* 🔥 Button + Socials grouped */}
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <a
+              href="#projects"
+              className="inline-block px-6 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-all duration-300"
+            >
+              View Work
+            </a>
+
+            <div className="flex gap-6">
+              <a
+                href="https://github.com/clintoy18"
+                target="_blank"
+                className="text-gray-500 hover:text-gray-800 transition"
+              >
+                <Github size={22} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/clint-alonzo-a4737b2b1"
+                target="_blank"
+                className="text-gray-500 hover:text-gray-800 transition"
+              >
+                <Linkedin size={22} />
+              </a>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Right: Profile Image */}
+        {/* Right side */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}

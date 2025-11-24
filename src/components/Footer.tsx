@@ -1,5 +1,6 @@
 // components/Footer.tsx
 import React from "react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
@@ -10,17 +11,14 @@ const Footer: React.FC = () => {
         </p>
 
         {/* Optional: tiny social icons (uncomment if you want) */}
-        {/* <div className="mt-6 flex justify-center gap-8">
-          <a href="#" className="text-gray-500 hover:text-gray-800 transition">
+        <div className="mt-6 flex justify-center gap-8">
+          <a href="https://github.com/clintoy18" className="text-gray-500 hover:text-gray-800 transition">
             <Github size={20} />
           </a>
-          <a href="#" className="text-gray-500 hover:text-gray-800 transition">
+          <a href="https://www.linkedin.com/in/clint-alonzo-a4737b2b1/?originalSubdomain=ph" className="text-gray-500 hover:text-gray-800 transition">
             <Linkedin size={20} />
           </a>
-          <a href="#" className="text-gray-500 hover:text-gray-800 transition">
-            <Mail size={20} />
-          </a>
-        </div> */}
+        </div>
       </div>
 
       {/* Subtle bottom gradient fade (optional luxury touch) */}
