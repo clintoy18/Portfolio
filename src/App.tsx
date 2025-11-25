@@ -2,22 +2,36 @@
 import React, { Suspense, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
 import Skills from "./components/Skills";
 
+// LAZY LOAD 
 const Projects = React.lazy(() => import("./components/Projects"));
+const LazyContact = React.lazy(() => import("./components/Contact"));
+const LazyFooter = React.lazy(() => import("./components/Footer"));
 
 const SectionLoader = () => (
-  <div className="flex items-center justify-center py-16">
+  <div
+    role="status"
+    aria-label="Loading section content" // Use a more general label
+    className="flex items-center justify-center py-16"
+  >
     <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
 const App: React.FC = () => {
-  // Preload heavy component to avoid scroll-lag
   useEffect(() => {
-    import("./components/Projects");
+    if ('requestIdleCallback' in window) {
+      // Defer the import until the browser is idle
+      (window as any).requestIdleCallback(() => {
+        import("./components/Projects");
+      });
+    } else {
+      // Fallback
+      setTimeout(() => {
+        import("./components/Projects");
+      }, 500); // 500ms delay
+    }
   }, []);
 
   return (
@@ -32,11 +46,15 @@ const App: React.FC = () => {
           <Projects />
         </Suspense>
 
-        <Contact />
+        <Suspense fallback={<SectionLoader />}>
+          <LazyContact />
+        </Suspense>
       </main>
 
       <div className="mx-auto max-w-5xl px-6 sm:px-8 lg:px-12">
-        <Footer />
+        <Suspense fallback={<SectionLoader />}>
+          <LazyFooter />
+        </Suspense>
       </div>
     </div>
   );
