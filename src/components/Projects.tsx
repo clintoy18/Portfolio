@@ -1,5 +1,5 @@
 // components/Projects.tsx
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
@@ -208,7 +208,7 @@ Because style shouldn’t cost the planet.`,
       "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/student-grades.jpg",
       "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/pdf-export.jpg",
     ],
-    fullDescription:  `The UC-CSS Sit-In Monitoring System is a school project developed using Vanilla PHP, JavaScript, and MySQL for the College of Computer Studies. It streamlines the tracking and management of student sit-in sessions while providing dedicated tools for both administrators and students. Administrators can monitor sit-in activity, manage students, post announcements, and generate PDF reports, while students can reserve rooms, track their sit-in status, update their profiles, and submit feedback. The system aims to improve laboratory utilization, enhance student accountability, and provide a more organized workflow for CCS sit-in operations.`,
+    fullDescription: `The UC-CSS Sit-In Monitoring System is a school project developed using Vanilla PHP, JavaScript, and MySQL for the College of Computer Studies. It streamlines the tracking and management of student sit-in sessions while providing dedicated tools for both administrators and students. Administrators can monitor sit-in activity, manage students, post announcements, and generate PDF reports, while students can reserve rooms, track their sit-in status, update their profiles, and submit feedback. The system aims to improve laboratory utilization, enhance student accountability, and provide a more organized workflow for CCS sit-in operations.`,
     features: [
       "Admin Dashboard with statistics, charts, and recent activity",
       "Student Management with search, view, and record control",
@@ -226,9 +226,16 @@ Because style shouldn’t cost the planet.`,
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const featuredProject = projects.find((p) => p.featured);
-  const otherProjects = projects.filter((p) => !p.featured);
 
+  // ✅ FIX: Use useMemo to cache the filtered arrays
+  const featuredProject = useMemo(
+    () => projects.find((p) => p.featured),
+    [projects]
+  );
+  const otherProjects = useMemo(
+    () => projects.filter((p) => !p.featured),
+    [projects]
+  );
   return (
     <>
       <section
@@ -257,23 +264,23 @@ export default function Projects() {
               layoutId={featuredProject.id}
               onClick={() => setSelectedProject(featuredProject)}
               className="group cursor-pointer mb-24 overflow-hidden rounded-3xl bg-white shadow-2xl border border-gray-100"
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, zIndex: 10 }}
               transition={{ duration: 0.4 }}
             >
               <div className="grid lg:grid-cols-2">
-                <div className="p-10 lg:p-16 flex flex-col justify-center">
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="px-5 py-2 bg-rose-100 text-rose-700 rounded-full text-sm font-bold">
+                <div className="p-6 sm:p-10 lg:p-16 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                    <span className="px-4 py-1 bg-rose-100 text-rose-700 rounded-full text-xs sm:text-sm font-bold">
                       Featured • Real-World Impact
                     </span>
                   </div>
-                  <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
                     {featuredProject.title}
                   </h3>
-                  <p className="text-xl text-gray-700 leading-relaxed mb-8">
+                  <p className="text-base sm:text-xl text-gray-700 leading-relaxed mb-6 sm:mb-8">
                     {featuredProject.shortDesc}
                   </p>
-                  <div className="flex flex-wrap gap-3 mb-8">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
                     {featuredProject.tech.slice(0, 3).map((t) => (
                       <span
                         key={t}
@@ -288,11 +295,13 @@ export default function Projects() {
                       </span>
                     )}
                   </div>
-                  <p className="text-lg font-semibold text-blue-600 flex items-center gap-2">
+                  <p className="text-base sm:text-lg font-semibold text-blue-600 flex items-center gap-2">
                     Click to see how we helped Cebu in 24 hours
                     <span className="animate-pulse">→</span>
                   </p>
                 </div>
+
+                {/* Image Column: No changes needed here, as h-96 already sets a fixed height for mobile */}
                 <div className="relative h-96 lg:h-full min-h-96">
                   <img
                     src={featuredProject.coverImage}
@@ -300,11 +309,13 @@ export default function Projects() {
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-8 left-8 text-white">
-                    <p className="text-4xl font-bold">
+                  <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 text-white">
+                    <p className="text-3xl sm:text-4xl font-bold">
                       Cebu Earthquake Response
                     </p>
-                    <p className="text-xl opacity-90">October 2025</p>
+                    <p className="text-lg sm:text-xl opacity-90">
+                      October 2025
+                    </p>
                   </div>
                 </div>
               </div>
@@ -321,22 +332,21 @@ export default function Projects() {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {otherProjects.map((project, i) => (
+                {otherProjects.map((project) => (
                   <motion.div
                     key={project.id}
                     layoutId={project.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
                     onClick={() => setSelectedProject(project)}
-                    className="group cursor-pointer bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
-                    whileHover={{ y: -8 }}
+                    className="group cursor-pointer bg-white rounded-2xl shadow-xl hover:shadow-2xl overflow-hidden border border-gray-100 transition duration-300"
+                    whileHover={{ y: -8, scale: 1.01 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   >
                     <div className="relative h-48 overflow-hidden">
-                      <img
+                      <motion.img
+                        layoutId={`${project.id}-image`}
                         src={project.coverImage}
                         alt={project.title}
+                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -376,7 +386,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* Shared Modal — unchanged, beautiful as ever */}
+      {/* Shared Modal*/}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -399,7 +409,8 @@ export default function Projects() {
               </button>
 
               <div className="relative h-96">
-                <img
+                <motion.img
+                  layoutId={`${selectedProject.id}-image`} // Use a unique layoutId for the image if needed
                   src={selectedProject.coverImage}
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
