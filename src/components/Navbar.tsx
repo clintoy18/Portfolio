@@ -58,7 +58,8 @@ const Navbar: React.FC = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto max-w-5xl px-4 py-3 sm:px-6 sm:py-5 lg:px-10 lg:py-6">
+      <div className="mx-auto max-w-5xl px-4 py-5 sm:px-6 lg:px-10 lg:py-6">
+        {" "}
         <div className="flex justify-between items-center">
           {/* Logo */}
           <a
@@ -92,7 +93,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-3 rounded-xl hover:bg-white/30 transition"
+            className="md:hidden p-1 rounded-xl hover:bg-white/30 transition"
             aria-label="Toggle menu"
           >
             <motion.div
@@ -129,7 +130,6 @@ const Navbar: React.FC = () => {
             </motion.div>
           </button>
         </div>
-
         {/* Mobile Menu */}
         <motion.div
           initial={false}
