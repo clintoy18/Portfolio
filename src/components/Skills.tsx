@@ -2,51 +2,103 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const Skills: React.FC = () => {
-  const skills = [
-    { name: "React", level: 60 },
-    { name: "TypeScript", level: 60 },
-    { name: "Tailwind CSS", level: 85 },
-    { name: "Laravel", level: 80 },
-    { name: "ASP.Net", level: 75 },
-    { name: "PHP", level: 90 },
+  const skillCategories = [
+    {
+      title: "Frontend",
+      skills: ["HTML + CSS", "React", "TypeScript", "Tailwind CSS"],
+    },
+    {
+      title: "Backend",
+      skills: ["Laravel", "PHP", "ASP.NET", "Node.js"],
+    },
+    {
+      title: "Tools & Others",
+      skills: ["Git", "MySQL", "SQL", "Prisma"],
+    },
   ];
 
-  return (
-    <section id="skills" className="py-16 sm:py-24 border-t border-gray-200">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl sm:text-4xl font-light text-center text-gray-800 mb-12 sm:mb-16">
-          Skills
-        </h2>
+  // Animation variants for the container
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
 
-        <div className="max-w-3xl mx-auto space-y-8 sm:space-y-10">
-          {skills.map((skill, i) => (
+  // Animation variants for individual cards
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { type: "spring", stiffness: 100, damping: 12 } 
+    },
+  };
+
+  return (
+    <section id="skills" className="relative py-24 bg-[#FCFCFC] overflow-hidden">
+      {/* Decorative subtle background element */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-30 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-gray-200 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-slate-100 blur-[120px]" />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-6">
+        <div className="text-center mb-20">
+          <motion.h2 
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900"
+          >
+            Tech Stack
+          </motion.h2>
+          <div className="mt-4 h-1 w-12 bg-gray-900 mx-auto rounded-full" />
+        </div>
+
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10 max-w-6xl mx-auto"
+        >
+          {skillCategories.map((category) => (
             <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
+              key={category.title}
+              variants={cardVariants}
+              whileHover={{ y: -8 }}
+              className="relative p-8 rounded-3xl border border-gray-200/60 bg-white/70 backdrop-blur-md shadow-sm hover:shadow-2xl hover:shadow-gray-200/40 transition-all duration-500"
             >
-              <div className="flex justify-between text-xs sm:text-sm font-medium text-gray-600 mb-2">
-                <span>{skill.name}</span>
-                <span>{skill.level}%</span>
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">
+                  {category.title}
+                </h3>
+                <div className="h-[1px] flex-grow ml-4 bg-gray-100" />
               </div>
-              <div className="h-1 rounded-lg bg-gray-200 overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  transition={{
-                    duration: 1.2,
-                    delay: i * 0.1 + 0.3,
-                    ease: "easeOut",
-                  }}
-                  viewport={{ once: true }}
-                  className="h-full bg-gradient-to-r from-gray-600 to-gray-800 rounded-lg"
-                />
+              
+              <div className="flex flex-wrap gap-3">
+                {category.skills.map((skill) => (
+                  <motion.span
+                    key={skill}
+                    whileHover={{ scale: 1.05 }}
+                    className="px-5 py-2.5 bg-white border border-gray-100 rounded-2xl text-[13px] font-semibold text-gray-700 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-gray-900 hover:text-gray-900 transition-colors cursor-default"
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
+
+              {/* Minimalist dot pattern for texture */}
+              <div className="absolute bottom-4 right-4 grid grid-cols-2 gap-1 opacity-20">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="w-1 h-1 bg-gray-400 rounded-full" />
+                ))}
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

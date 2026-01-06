@@ -46,13 +46,13 @@ const projects: Project[] = [
     liveUrl: "https://cebu-calamity-response.vercel.app/",
     githubUrl: "#",
     coverImage:
-      "https://scontent.fceb6-4.fna.fbcdn.net/v/t39.30808-6/557353345_3689327544696027_2813327237064096691_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEu0nqSedHdHXo2UCPnNDXVSwS3FsyLZyhLBLcWzItnKFjh3wiq_M6u7FLNq-R0iL3Uvy8hG_vUfQkDzoTXw_wU&_nc_ohc=CIiaF46gj8wQ7kNvwEuRMft&_nc_oc=Adl1eUyiDNf8CowWZFpIaCnFvWE9HDIGdS3Ko4_9O---19rvQb6hZcieAWv5hFi7h8A&_nc_zt=23&_nc_ht=scontent.fceb6-4.fna&_nc_gid=gT3VrsubhfDeq_36wUUIHQ&oh=00_AfjdcOmOLuZBLQph7w_aEPyl_NyfYLhwGpU-8QlFiSWoBw&oe=6929A892",
-    gallery: [
-      "https://scontent.fceb6-4.fna.fbcdn.net/v/t39.30808-6/557034206_3688101421485306_8589708568887172690_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHikREKPzsWsf5QYWPQskn1q-1R0O91W3Kr7VHQ73VbcqXnXYhc_y-tlyAoqKPDfZLy3jla9bi7rh5y4mT5_eGd&_nc_ohc=YqcdrSq5gjIQ7kNvwFHoENv&_nc_oc=Adla1DJtn8Upn2HPhPqSFZvcHg7VnDOK98BpdLEBl8YqU8Oe6Nb6kdXvkym7-YJ94eY&_nc_zt=23&_nc_ht=scontent.fceb6-4.fna&_nc_gid=F3fQfLsZ3A39DDj11rGPeA&oh=00_AfhMvyWxyYuD_RGVPCaxVSPnt0bMzM9jrdAvSJhh5Vx3Ng&oe=6929BEEE",
-      "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/556312920_3689079548054160_201533419871339728_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF1Fknq-LxmY4Ckx8klbbMrNl4GWi-8icU2XgZaL7yJxenPyNKRBkg15NnZOkA2zKlo-fuz2J66jChwter1aULK&_nc_ohc=9x3mS_kh8MsQ7kNvwHxtkIF&_nc_oc=AdkCdI2NKfuMPvxP1hNBQtRLws6ChgFkzWhN0LIkDo0i5xRmHGFMrlRHkssFgEg_ev8&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=F3fQfLsZ3A39DDj11rGPeA&oh=00_AfjPgjyH8HuN1y7IJkk_39TyoeSzItb6p0x-rB4rK1h9tQ&oe=6929B736",
-      "https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-6/557624587_853797553985425_5458163027310027796_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHmfNHjkF6U7nJ9GKPL-7itrcm8MBodf7CtybwwGh1_sJV-BrrzRm_9nAyeYJkhJ6hiJsWrMjNa2DCY5O4LsL4b&_nc_ohc=_aYL_8WedwEQ7kNvwHSsyeQ&_nc_oc=Admmtz6HEjz3OWb6MvKO2YHVABL-QXDygIiiR8dfhCKpsRiJrr-ZIeXpCZ79aVfesJA&_nc_zt=23&_nc_ht=scontent.fceb2-1.fna&_nc_gid=EpfgvOtdBGnfZ1EjIVdpSQ&oh=00_AfhRU7F1Yvwbg3a0-HGpElx4XA-6PIWd1pjfVeT5vjxWnQ&oe=6929AAA1",
-      "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/558969170_3693836804245101_999296108504560358_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHZV9oIQTK7vEJZMRC_2N8QyTfmOHNN8evJN-Y4c03x62HC5zcKE5SuIp_CAHrSJHHb48aKQcY5IKMZEYS17-aX&_nc_ohc=paE2ntlpFiwQ7kNvwHQI0fP&_nc_oc=AdmD8zaaZVoXlRxgBwjD_GFVrAp5PTvBWZiTxD96r8MMOFUq8yTPt7QBsQncViGNgL4&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=G-t4b9A_BY7rI5YONoy7GA&oh=00_AfjExZqo97DatO0-VtHHJ9T9A2m6yCh9lWcHqs5dJozN8Q&oe=6929A1B4",
-    ],
+      "https://insiderph.com/uploads/articles/built-in-24-hours-uc-it-students-launch-cebu-earthquake-relief-app-2-1024x768.webp",
+    // gallery: [
+    //   "https://scontent.fceb6-4.fna.fbcdn.net/v/t39.30808-6/557034206_3688101421485306_8589708568887172690_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHikREKPzsWsf5QYWPQskn1q-1R0O91W3Kr7VHQ73VbcqXnXYhc_y-tlyAoqKPDfZLy3jla9bi7rh5y4mT5_eGd&_nc_ohc=YqcdrSq5gjIQ7kNvwFHoENv&_nc_oc=Adla1DJtn8Upn2HPhPqSFZvcHg7VnDOK98BpdLEBl8YqU8Oe6Nb6kdXvkym7-YJ94eY&_nc_zt=23&_nc_ht=scontent.fceb6-4.fna&_nc_gid=F3fQfLsZ3A39DDj11rGPeA&oh=00_AfhMvyWxyYuD_RGVPCaxVSPnt0bMzM9jrdAvSJhh5Vx3Ng&oe=6929BEEE",
+    //   "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/556312920_3689079548054160_201533419871339728_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF1Fknq-LxmY4Ckx8klbbMrNl4GWi-8icU2XgZaL7yJxenPyNKRBkg15NnZOkA2zKlo-fuz2J66jChwter1aULK&_nc_ohc=9x3mS_kh8MsQ7kNvwHxtkIF&_nc_oc=AdkCdI2NKfuMPvxP1hNBQtRLws6ChgFkzWhN0LIkDo0i5xRmHGFMrlRHkssFgEg_ev8&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=F3fQfLsZ3A39DDj11rGPeA&oh=00_AfjPgjyH8HuN1y7IJkk_39TyoeSzItb6p0x-rB4rK1h9tQ&oe=6929B736",
+    //   "https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-6/557624587_853797553985425_5458163027310027796_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHmfNHjkF6U7nJ9GKPL-7itrcm8MBodf7CtybwwGh1_sJV-BrrzRm_9nAyeYJkhJ6hiJsWrMjNa2DCY5O4LsL4b&_nc_ohc=_aYL_8WedwEQ7kNvwHSsyeQ&_nc_oc=Admmtz6HEjz3OWb6MvKO2YHVABL-QXDygIiiR8dfhCKpsRiJrr-ZIeXpCZ79aVfesJA&_nc_zt=23&_nc_ht=scontent.fceb2-1.fna&_nc_gid=EpfgvOtdBGnfZ1EjIVdpSQ&oh=00_AfhRU7F1Yvwbg3a0-HGpElx4XA-6PIWd1pjfVeT5vjxWnQ&oe=6929AAA1",
+    //   "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/558969170_3693836804245101_999296108504560358_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHZV9oIQTK7vEJZMRC_2N8QyTfmOHNN8evJN-Y4c03x62HC5zcKE5SuIp_CAHrSJHHb48aKQcY5IKMZEYS17-aX&_nc_ohc=paE2ntlpFiwQ7kNvwHQI0fP&_nc_oc=AdmD8zaaZVoXlRxgBwjD_GFVrAp5PTvBWZiTxD96r8MMOFUq8yTPt7QBsQncViGNgL4&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=G-t4b9A_BY7rI5YONoy7GA&oh=00_AfjExZqo97DatO0-VtHHJ9T9A2m6yCh9lWcHqs5dJozN8Q&oe=6929A1B4",
+    // ],
     articles: [
       {
         title:
@@ -67,7 +67,7 @@ const projects: Project[] = [
         url: "https://www.facebook.com/sunstarcebu/posts/bayanihan-goes-digital-every-pin-saves-a-lifea-group-of-students-from-the-univer/853538200678027/",
         outlet: "SunStar",
         thumbnail:
-          "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/557623070_853536947344819_222818715669326065_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG4-rhav73GlNE98qeoCUI2qT2TfLxhmH6pPZN8vGGYfidSursr_qBgIQq1svTW2n9231dBUSnE8soqBB-c37Yt&_nc_ohc=l9llmb0uk2kQ7kNvwGF3Cee&_nc_oc=AdnsHpbQvaGhvbgizJLbC-8BwxjIZGNzjx0tGrJgQfIdCDLtteLO1mxON0l8HINVcx8&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=f27J9x6toPGrYy46JzyHUw&oh=00_AfjKFeS2Ump3i033yGBoBg8nKSrA8h_Kt3K_qfGUxA8CAg&oe=6929ACA2",
+          "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/557623070_853536947344819_222818715669326065_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG4-rhav73GlNE98qeoCUI2qT2TfLxhmH6pPZN8vGGYfidSursr_qBgIQq1svTW2n9231dBUSnE8soqBB-c37Yt&_nc_ohc=mSM2_MxygO0Q7kNvwHoT4qb&_nc_oc=Adnpoi6LTW2tgzmsNFcWYIwXFCAmjfMYnZxel3Iub45TTz8vphtzsf0ZQAFnl2msP40&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=6eOECYiC0a1dcdBXyFe2Nw&oh=00_AfqLRDLjdwXSm2wzRQUuHtccF-xtFbduwOog8QBeclGu-w&oe=6962CDA2",
       },
       {
         title:
@@ -128,11 +128,11 @@ No family left unseen. Every pin = hope delivered.`,
     liveUrl: "https://thrift-it-marketplace.laravel.cloud",
     githubUrl: "https://github.com/yourusername/thrift-it",
     coverImage:
-      "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/581039697_3727950757500372_2764432074123300700_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGLqzz_0GUaqF8Idpj3y47iVhk6ILXSqyhWGTogtdKrKC_y8NOS-YSd2Ymih3vRRMT_45BxBVMDFuZngUhJoPgJ&_nc_ohc=t4yXJ8uD7fwQ7kNvwH1rrPj&_nc_oc=AdnldIKUiCBBFGZeg3zg2WCxzehSkTDnp8wKCDA8rBN50y6aOWbEJWm_AzxUf-qWUAI&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=F-BZHrAoVrcbRRkKiSY_Gg&oh=00_AfiJCH7DAUASBKpapzPZUokkRiyawyWp8Hszlj2kEiqh5A&oe=6929B1BF",
+      "https://clint-portfolio-bucket.s3.ap-southeast-1.amazonaws.com/Screenshot+2025-11-12+234139.png",
     gallery: [
-      "https://scontent.fceb6-3.fna.fbcdn.net/v/t39.30808-6/580935203_3727952574166857_8583578493059796274_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEoc1Nn7JcThh8ce64ixEHqlsotA9bK5CeWyi0D1srkJ3BoXw3wztlMN6_WA97eKLCr8efUAXp0FoQtCHcdCBj-&_nc_ohc=8DiaQBCT91AQ7kNvwG0YdrM&_nc_oc=Adk423PuHv-iifNd7WG09ut6h-Ll_4G-I_P-nlM7SxZKIdeqDLk7N4kfL2uzqftaGNQ&_nc_zt=23&_nc_ht=scontent.fceb6-3.fna&_nc_gid=JS7jqaawY1rWdSZuf5_abg&oh=00_AfgreiBKd7-IUeEHVSUaLXVnFjl_EkiBmOKurl3SaMucyA&oe=6929C006",
-      "https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/581933244_3727952327500215_6359554376474449493_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHcyjAeSXvW56soZvabuRXMRlRuMf0kC-dGVG4x_SQL564ZBMGrrkNquGY5Cr_31aXcKVz5In_mFpj_OTEdoaQq&_nc_ohc=5Y_lOaPiPA4Q7kNvwHTFQTk&_nc_oc=AdmUqYjA6IEnjXFiS73uJgwsfbIyA43zBMkDLDM3rOMFBURwo55IPGolhFFaMW_etvY&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=U74x5zSCrGZUMbiqBLUtpA&oh=00_AfgsSdODGXD7CgLyapwm668Gc4GIgJhr_7v3oAzjRkyuqQ&oe=6929950E",
-      "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/579262597_3727952180833563_7157071138249456877_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeE0IGbxIudOlIGinISgo1bgyfGvIufeJ_DJ8a8i594n8JDitrEM1lto583ezYAOMt62VKIYPWCFfyKgD-5F-ypY&_nc_ohc=0zuxqBhdJBMQ7kNvwHMkpwq&_nc_oc=AdlZR7LGXfz-z8mrvkKO2BEFGM6YVsbcTgn8QFDULmUciJ6MYzjJm1PpFsXbxuaXF7c&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=1EK3j4i-upLXbrfBeTMzWQ&oh=00_AfhEyhusp-XcK5mJJs13M-8B7Y2KLZ8YdZNL5Q6EZ02B6Q&oe=6929BAD9",
+      "https://clint-portfolio-bucket.s3.ap-southeast-1.amazonaws.com/Screenshot+2026-01-06+192552.png",
+      "https://clint-portfolio-bucket.s3.ap-southeast-1.amazonaws.com/Screenshot+2026-01-06+192455.png",
+      "https://clint-portfolio-bucket.s3.ap-southeast-1.amazonaws.com/Screenshot+2026-01-06+192530.png",
     ],
     impactStats: [
       { icon: Users, label: "Active Users", value: "15+" },
