@@ -27,17 +27,25 @@ const Skills: React.FC = () => {
   };
 
   // Animation variants for individual cards
+  // Animation variants for individual cards
   const cardVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: "spring", stiffness: 100, damping: 12 } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring", // TypeScript now sees this as the literal "spring"
+        stiffness: 100,
+        damping: 12,
+      },
     },
-  };
+  } as const; // <--- Add this right here
 
   return (
-    <section id="skills" className="relative py-24 bg-[#FCFCFC] overflow-hidden">
+    <section
+      id="skills"
+      className="relative py-24 bg-[#FCFCFC] overflow-hidden"
+    >
       {/* Decorative subtle background element */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-30 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-gray-200 blur-[120px]" />
@@ -46,7 +54,7 @@ const Skills: React.FC = () => {
 
       <div className="container relative z-10 mx-auto px-6">
         <div className="text-center mb-20">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -57,7 +65,7 @@ const Skills: React.FC = () => {
           <div className="mt-4 h-1 w-12 bg-gray-900 mx-auto rounded-full" />
         </div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -77,7 +85,7 @@ const Skills: React.FC = () => {
                 </h3>
                 <div className="h-[1px] flex-grow ml-4 bg-gray-100" />
               </div>
-              
+
               <div className="flex flex-wrap gap-3">
                 {category.skills.map((skill) => (
                   <motion.span
