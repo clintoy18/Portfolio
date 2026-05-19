@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 
@@ -7,12 +8,12 @@ const skillCategories = [
   {
     title: "Frontend Craft",
     note: "Responsive interfaces with practical UI structure and clean Tailwind systems.",
-    skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS"],
+    skills: ["Next.js", "React", "TypeScript", "JavaScript", "Tailwind CSS"],
   },
   {
     title: "Backend Systems",
     note: "Maintainable full-stack foundations using service-repository patterns.",
-    skills: ["Laravel", "PHP", "C#", "ASP.NET", "MySQL", "SQL"],
+    skills: ["Laravel", "PHP", "C#", "ASP.NET", "Node.js", "MySQL", "SQL"],
   },
   {
     title: "Impact Work",
@@ -24,13 +25,23 @@ const skillCategories = [
 const timeline = [
   {
     title: "Full Stack Software Engineer",
-    organization: "Full Scale",
+    organization: "Full Scale Teams PH",
     year: "Soon",
+    status: "Next step",
+    detail:
+      "Target role built from current internship work, full-stack practice, and production-focused portfolio projects.",
+    tone: "next",
+    url: "https://fullscale.io/",
   },
   {
     title: "Software Engineer Intern",
     organization: "Full Scale Teams PH",
     year: "Current",
+    status: "Active",
+    detail:
+      "Current software engineering internship focused on learning professional delivery standards and team-based engineering habits.",
+    tone: "current",
+    url: "https://fullscale.io/",
   },
   {
     title: "Jumpstart Program",
@@ -120,20 +131,71 @@ const Skills: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.06 }}
-                    className="relative grid grid-cols-[1.75rem_1fr_auto] gap-3"
+                    whileHover={
+                      item.tone === "next"
+                        ? { x: 6, transition: { duration: 0.18 } }
+                        : undefined
+                    }
+                    className={`group relative grid grid-cols-[1.75rem_1fr_auto] gap-3 rounded-md transition ${
+                      item.tone === "next"
+                        ? "cursor-default hover:bg-zinc-50"
+                        : ""
+                    }`}
                   >
                     <span
-                      className={`mt-1.5 h-3.5 w-3.5 border border-zinc-300 bg-white ${
-                        index === 0 ? "bg-zinc-950" : ""
+                      className={`mt-1.5 h-3.5 w-3.5 border border-zinc-300 bg-white transition ${
+                        item.tone === "next"
+                          ? "animate-pulse border-zinc-950 bg-zinc-950 shadow-[0_0_0_6px_rgba(24,24,27,0.08)]"
+                          : ""
+                      } ${
+                        item.tone === "current"
+                          ? "border-zinc-950 bg-white shadow-[inset_0_0_0_3px_white,0_0_0_1px_#18181b]"
+                          : ""
                       }`}
                     />
                     <div>
-                      <h4 className="text-base font-semibold leading-6 text-zinc-950 sm:text-lg">
-                        {item.title}
-                      </h4>
-                      <p className="mt-1 text-sm leading-6 text-zinc-600">
-                        {item.organization}
-                      </p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h4 className="text-base font-semibold leading-6 text-zinc-950 sm:text-lg">
+                          {item.title}
+                        </h4>
+                        {item.status && (
+                          <span
+                            className={`rounded-sm px-2 py-0.5 text-[11px] font-medium ${
+                              item.tone === "next"
+                                ? "bg-zinc-950 text-white"
+                                : "border border-zinc-200 bg-white text-zinc-600"
+                            }`}
+                          >
+                            {item.status}
+                          </span>
+                        )}
+                      </div>
+                      {item.url ? (
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-1 inline-flex items-center gap-1.5 text-sm leading-6 text-zinc-600 transition hover:text-zinc-950"
+                        >
+                          {item.organization}
+                          <ExternalLink size={12} />
+                        </a>
+                      ) : (
+                        <p className="mt-1 text-sm leading-6 text-zinc-600">
+                          {item.organization}
+                        </p>
+                      )}
+                      {item.detail && (
+                        <p
+                          className={`mt-2 max-w-sm text-xs leading-6 text-zinc-500 ${
+                            item.tone === "next"
+                              ? "opacity-80 transition group-hover:text-zinc-700"
+                              : ""
+                          }`}
+                        >
+                          {item.detail}
+                        </p>
+                      )}
                     </div>
                     <span className="mt-1 h-fit rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs font-medium text-zinc-600">
                       {item.year}
