@@ -1,17 +1,21 @@
-// components/Projects.tsx
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
 import {
+  ArrowUpRight,
+  Calendar,
+  CheckCircle,
+  Clock,
   ExternalLink,
   Github,
-  X,
   MapPin,
-  Users,
-  Clock,
-  CheckCircle,
   Recycle,
-  Calendar,
+  Users,
+  X,
 } from "lucide-react";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
 
 type Project = {
   id: string;
@@ -20,10 +24,10 @@ type Project = {
   shortDesc: string;
   tech: string[];
   liveUrl?: string;
-  githubUrl: string;
-  coverImage: string;
+  githubUrl?: string;
+  coverImage?: string;
   gallery?: string[];
-  impactStats?: { icon: any; label: string; value: string }[];
+  impactStats?: { icon: LucideIcon; label: string; value: string }[];
   fullDescription: string;
   features: string[];
   featured?: boolean;
@@ -41,18 +45,11 @@ const projects: Project[] = [
     title: "AidVocate",
     subtitle: "Cebu Calamity Response App",
     shortDesc:
-      "Real-time disaster aid platform launched during the 2025 Cebu earthquake. Helped hundreds of families get food, water & shelter.",
+      "A real-time disaster aid platform built and launched during the 2025 Cebu earthquake to help families request food, water, shelter, and rescue support.",
     tech: ["React", "Node.js", "MongoDB", "OpenStreetMap", "AWS S3", "Vercel"],
     liveUrl: "https://cebu-calamity-response.vercel.app/",
-    githubUrl: "#",
     coverImage:
       "https://insiderph.com/uploads/articles/built-in-24-hours-uc-it-students-launch-cebu-earthquake-relief-app-2-1024x768.webp",
-    // gallery: [
-    //   "https://scontent.fceb6-4.fna.fbcdn.net/v/t39.30808-6/557034206_3688101421485306_8589708568887172690_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHikREKPzsWsf5QYWPQskn1q-1R0O91W3Kr7VHQ73VbcqXnXYhc_y-tlyAoqKPDfZLy3jla9bi7rh5y4mT5_eGd&_nc_ohc=YqcdrSq5gjIQ7kNvwFHoENv&_nc_oc=Adla1DJtn8Upn2HPhPqSFZvcHg7VnDOK98BpdLEBl8YqU8Oe6Nb6kdXvkym7-YJ94eY&_nc_zt=23&_nc_ht=scontent.fceb6-4.fna&_nc_gid=F3fQfLsZ3A39DDj11rGPeA&oh=00_AfhMvyWxyYuD_RGVPCaxVSPnt0bMzM9jrdAvSJhh5Vx3Ng&oe=6929BEEE",
-    //   "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/556312920_3689079548054160_201533419871339728_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF1Fknq-LxmY4Ckx8klbbMrNl4GWi-8icU2XgZaL7yJxenPyNKRBkg15NnZOkA2zKlo-fuz2J66jChwter1aULK&_nc_ohc=9x3mS_kh8MsQ7kNvwHxtkIF&_nc_oc=AdkCdI2NKfuMPvxP1hNBQtRLws6ChgFkzWhN0LIkDo0i5xRmHGFMrlRHkssFgEg_ev8&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=F3fQfLsZ3A39DDj11rGPeA&oh=00_AfjPgjyH8HuN1y7IJkk_39TyoeSzItb6p0x-rB4rK1h9tQ&oe=6929B736",
-    //   "https://scontent.fceb2-1.fna.fbcdn.net/v/t39.30808-6/557624587_853797553985425_5458163027310027796_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHmfNHjkF6U7nJ9GKPL-7itrcm8MBodf7CtybwwGh1_sJV-BrrzRm_9nAyeYJkhJ6hiJsWrMjNa2DCY5O4LsL4b&_nc_ohc=_aYL_8WedwEQ7kNvwHSsyeQ&_nc_oc=Admmtz6HEjz3OWb6MvKO2YHVABL-QXDygIiiR8dfhCKpsRiJrr-ZIeXpCZ79aVfesJA&_nc_zt=23&_nc_ht=scontent.fceb2-1.fna&_nc_gid=EpfgvOtdBGnfZ1EjIVdpSQ&oh=00_AfhRU7F1Yvwbg3a0-HGpElx4XA-6PIWd1pjfVeT5vjxWnQ&oe=6929AAA1",
-    //   "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/558969170_3693836804245101_999296108504560358_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHZV9oIQTK7vEJZMRC_2N8QyTfmOHNN8evJN-Y4c03x62HC5zcKE5SuIp_CAHrSJHHb48aKQcY5IKMZEYS17-aX&_nc_ohc=paE2ntlpFiwQ7kNvwHQI0fP&_nc_oc=AdmD8zaaZVoXlRxgBwjD_GFVrAp5PTvBWZiTxD96r8MMOFUq8yTPt7QBsQncViGNgL4&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=G-t4b9A_BY7rI5YONoy7GA&oh=00_AfjExZqo97DatO0-VtHHJ9T9A2m6yCh9lWcHqs5dJozN8Q&oe=6929A1B4",
-    // ],
     articles: [
       {
         title:
@@ -63,58 +60,34 @@ const projects: Project[] = [
           "https://insiderph.com/uploads/articles/built-in-24-hours-uc-it-students-launch-cebu-earthquake-relief-app-2-1024x768.webp",
       },
       {
-        title: "BAYANIHAN GOES DIGITAL: EVERY PIN SAVES A LIFE",
+        title: "Bayanihan goes digital: Every pin saves a life",
         url: "https://www.facebook.com/sunstarcebu/posts/bayanihan-goes-digital-every-pin-saves-a-lifea-group-of-students-from-the-univer/853538200678027/",
         outlet: "SunStar",
         thumbnail:
           "https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/557623070_853536947344819_222818715669326065_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG4-rhav73GlNE98qeoCUI2qT2TfLxhmH6pPZN8vGGYfidSursr_qBgIQq1svTW2n9231dBUSnE8soqBB-c37Yt&_nc_ohc=mSM2_MxygO0Q7kNvwHoT4qb&_nc_oc=Adnpoi6LTW2tgzmsNFcWYIwXFCAmjfMYnZxel3Iub45TTz8vphtzsf0ZQAFnl2msP40&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=6eOECYiC0a1dcdBXyFe2Nw&oh=00_AfqLRDLjdwXSm2wzRQUuHtccF-xtFbduwOog8QBeclGu-w&oe=6962CDA2",
       },
       {
-        title:
-          "Cebu students connect calamity victims to help with app, website",
+        title: "Cebu students connect calamity victims to help with app",
         url: "https://www.gmanetwork.com/regionaltv/youngminds/110567/cebu-students-connect-calamity-victims-to-help-with-app-website/story/",
-        outlet: "GMA REGIONAL TV",
+        outlet: "GMA Regional TV",
         thumbnail:
           "https://images.gmanews.tv/regionaltv2023/content_images/article/RTV-Banner-Card---2025-10-04T230743_721_2025_10_04_23_09_59.png",
-      },
-      {
-        title:
-          "Website na kayang makahingi ng agarang relief aid, naimbento ng 3 estudyante sa Cebu",
-        url: "https://ibctv13.com/website-na-kayang-makahingi-ng-agarang-relief-aid-naimbento-ng-3-estudyante-sa-cebu/",
-        outlet: "IBCTV13",
-        thumbnail:
-          "https://ibctv13.com/wp-content/uploads/2025/10/AIDVOCATE.webp",
       },
     ],
     impactStats: [
       { icon: MapPin, label: "Reports", value: "2k+" },
-      { icon: Users, label: "Families Helped", value: "100+" },
+      { icon: Users, label: "Families helped", value: "100+" },
       { icon: CheckCircle, label: "Resolved", value: "90%" },
-      { icon: Clock, label: "Avg Response", value: "<6 hrs" },
+      { icon: Clock, label: "Avg response", value: "<6 hrs" },
     ],
-    fullDescription: `AidVocate — Giving Aid & Advocating for those in need.
-
-Launched at 3:58 AM on October 2, 2025, right in the middle of the Cebu earthquake crisis.
-
-We saw families posting on Facebook:  
-"No food. No water. Relief hasn't reached us."
-
-That was enough.
-
-In under 24 hours, we built and deployed a full-stack real-time disaster response platform that:
-• Lets anyone pin their exact location and needs
-• Shows live reports on an interactive OpenStreetMap
-• Enables responders to navigate and mark aid as delivered
-• Stores all images & proof on AWS S3
-• Runs fast and free using MongoDB Atlas + Vercel
-
-No family left unseen. Every pin = hope delivered.`,
+    fullDescription:
+      "AidVocate was built in under 24 hours after families in Cebu began asking for urgent help online. The platform lets people pin their location, explain their needs, upload proof, and give responders a live map of requests that can be marked as delivered.",
     features: [
-      "Real-time GPS pinning (even on low-end phones)",
-      "Report on behalf of others",
-      "Interactive OpenStreetMap with clustering",
-      "Secure image uploads via AWS S3",
-      "Fully mobile responsive & PWA-ready",
+      "Location-based reporting with OpenStreetMap",
+      "Report on behalf of affected families",
+      "Image uploads stored on AWS S3",
+      "Responder workflow for delivery updates",
+      "Mobile-first interface for low-bandwidth crisis use",
     ],
     featured: true,
   },
@@ -123,10 +96,9 @@ No family left unseen. Every pin = hope delivered.`,
     title: "Thrift-It",
     subtitle: "Sustainable Fashion & Upcycling Platform",
     shortDesc:
-      "Capstone project connecting users with upcyclers. Book appointments, chat in real-time, save clothes from landfills.",
+      "A capstone marketplace connecting users with upcyclers through appointments, listings, chat, reviews, and admin workflows.",
     tech: ["Laravel", "Blade", "MySQL", "Tailwind", "Pusher"],
     liveUrl: "https://thrift-it-marketplace.laravel.cloud",
-    githubUrl: "https://github.com/yourusername/thrift-it",
     coverImage:
       "https://clint-portfolio-bucket.s3.ap-southeast-1.amazonaws.com/Screenshot+2025-11-12+234139.png",
     gallery: [
@@ -135,258 +107,199 @@ No family left unseen. Every pin = hope delivered.`,
       "https://clint-portfolio-bucket.s3.ap-southeast-1.amazonaws.com/Screenshot+2026-01-06+192530.png",
     ],
     impactStats: [
-      { icon: Users, label: "Active Users", value: "15+" },
+      { icon: Users, label: "Active users", value: "15+" },
       { icon: Calendar, label: "Appointments", value: "0+" },
-      { icon: Recycle, label: "Items Saved", value: "0+" },
+      { icon: Recycle, label: "Items saved", value: "0+" },
     ],
-    fullDescription: `Thrift-It promotes sustainable fashion by connecting people who want to upcycle old clothes with skilled local artisans.
-
-A full-featured platform with appointment booking, real-time chat, product listings, reviews, and admin analytics — all built with Laravel + Blade Pages.
-
-Because style shouldn’t cost the planet.`,
+    fullDescription:
+      "Thrift-It promotes sustainable fashion by helping people turn old clothing into new value through skilled local upcyclers. It includes booking, chat, product listings, reviews, and admin analytics.",
     features: [
-      "Role-based system (User / Upcycler / Admin)",
+      "Role-based user, upcycler, and admin flows",
       "Real-time chat with Pusher",
-      "Item Listings",
-      "Appointment booking & calendar",
-      "Review & rating system",
-      "Clean architecture & beautiful emails",
+      "Appointment booking and calendar views",
+      "Review and rating system",
+      "Admin dashboards and email templates",
     ],
   },
   {
     id: "student-performance-tracker",
     title: "Student Performance Tracker",
-    subtitle: "Full-Stack Student Monitoring & Feedback Platform",
+    subtitle: "Student Monitoring & Feedback Platform",
     shortDesc:
-      "Monitor student outcomes, collect feedback, and keep students, teachers, and admins aligned with real-time dashboards and PDF reports.",
-    tech: [
-      ".NET 9",
-      "React 19",
-      "Vite",
-      "TypeScript",
-      "Tailwind",
-      "EF Core",
-      "SQLite/SQL Server",
-      "JWT",
-      "Serilog",
-      "TanStack Table",
-    ],
-    liveUrl: "https://your-live-url.com",
-    githubUrl: "https://github.com/yourusername/student-performance-tracker",
-    coverImage:
-      "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/cover.jpg",
-    gallery: [
-      "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/dashboard.jpg",
-      "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/student-grades.jpg",
-      "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/pdf-export.jpg",
-    ],
-    fullDescription: `Student Performance Tracker is a full-stack platform helping schools monitor student outcomes, collect feedback, and align administrators, teachers, and students. Built with a clean architecture backend (.NET 9 API) and a React + Vite dashboard. Features include RBAC, dashboards, course management, PDF exports, and logging.`,
+      "A full-stack school dashboard for monitoring outcomes, collecting feedback, managing courses, and exporting reports.",
+    tech: [".NET 9", "React 19", "TypeScript", "Tailwind", "EF Core", "JWT"],
+    fullDescription:
+      "Student Performance Tracker helps administrators, teachers, and students stay aligned through role-based dashboards, course management, feedback tools, PDF exports, and structured logging.",
     features: [
-      "Role-based system (Student / Teacher / Admin)",
-      "Student dashboard with grades & enrollment",
-      "Teacher dashboard with courses & feedback management",
-      "Admin dashboard with user management and course assignment",
+      "Role-based student, teacher, and admin dashboards",
+      "Course and enrollment management",
+      "Feedback collection workflows",
       "PDF export for summaries and reports",
-      "JWT authentication & structured logging with Serilog",
+      "JWT authentication and Serilog logging",
     ],
   },
   {
-    id: "UC-CSS Sit-In Monitoring System",
-    title: "Sit-In Monitoring System",
-    subtitle:
-      "A school project using Vanilla PHP and JavaScript designed for the College of Computer Studies.",
+    id: "shift-workspace",
+    title: "Shift Workspace",
+    subtitle: "Coworking Booking & Operations Platform",
     shortDesc:
-      "It manages and monitors student sit-in sessions, offering features like room reservations, session tracking, and feedback management for both admins and students.",
-    tech: ["PHP ", "JavaScript ", "MySQL ", "Tailwind", "GitHub"],
-    liveUrl: "https://your-live-url.com",
+      "A workspace booking experience with landing pages, role-based dashboards, cashier seat selection, booking timers, expiration alerts, and printable receipts.",
+    tech: ["React", "TypeScript", "Vite", "shadcn-ui", "Tailwind", "Vitest"],
+    liveUrl: "https://shift-workspace-launch.vercel.app",
+    githubUrl: "https://github.com/clintoy18/shift-workspace-launch",
+    fullDescription:
+      "Shift Workspace is a coworking space product prototype built with React, TypeScript, shadcn-ui, and Tailwind. It includes a public marketing site plus protected customer, admin, and cashier areas. The cashier flow manages seat bookings, pricing, timers, expiring-seat notifications, confirmation modals, and receipt printing.",
+    features: [
+      "Role-based customer, admin, and cashier dashboards",
+      "Protected routing with mocked authentication",
+      "Interactive seat booking state and occupancy tracking",
+      "Expiration alerts for seats nearing checkout",
+      "Cashier confirmation flow and printable booking receipts",
+      "Marketing landing page with pricing, FAQ, location, and lead capture sections",
+    ],
+  },
+  {
+    id: "sit-in-monitoring",
+    title: "Sit-In Monitoring System",
+    subtitle: "College Laboratory Session Management",
+    shortDesc:
+      "A PHP and MySQL system for room reservations, session tracking, announcements, feedback, and PDF reports.",
+    tech: ["PHP", "JavaScript", "MySQL", "Tailwind"],
     githubUrl:
       "https://github.com/clintoy18/CCS-Sitting-Monitoring-System---PHP",
-    coverImage:
-      "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/cover.jpg",
-    gallery: [
-      "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/dashboard.jpg",
-      "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/student-grades.jpg",
-      "https://your-s3-bucket.s3.ap-southeast-1.amazonaws.com/spt/pdf-export.jpg",
-    ],
-    fullDescription: `The UC-CSS Sit-In Monitoring System is a school project developed using Vanilla PHP, JavaScript, and MySQL for the College of Computer Studies. It streamlines the tracking and management of student sit-in sessions while providing dedicated tools for both administrators and students. Administrators can monitor sit-in activity, manage students, post announcements, and generate PDF reports, while students can reserve rooms, track their sit-in status, update their profiles, and submit feedback. The system aims to improve laboratory utilization, enhance student accountability, and provide a more organized workflow for CCS sit-in operations.`,
+    fullDescription:
+      "The Sit-In Monitoring System organizes student laboratory sessions for the College of Computer Studies. Administrators can manage students, monitor sessions, post announcements, and generate reports, while students can reserve rooms and submit feedback.",
     features: [
-      "Admin Dashboard with statistics, charts, and recent activity",
-      "Student Management with search, view, and record control",
-      "Sit-In Monitoring for ongoing and completed sessions",
-      "Manual Sit-In functionality based on purpose and laboratory",
-      "Room reservation and scheduling system for students",
-      "Announcements module for posting and deleting updates",
-      "PDF report generation for sit-in records",
-      "Search functionality for students by name or ID",
-      "Student feedback submission to administrators",
-      "Student profile management with image uploads",
+      "Admin dashboard with statistics and recent activity",
+      "Student search, profile, and session records",
+      "Room reservation and scheduling",
+      "Announcement and feedback modules",
+      "PDF report generation",
     ],
   },
 ];
 
+const featuredProject = projects.find((project) => project.featured);
+const otherProjects = projects.filter((project) => !project.featured);
+
+function ProjectVisual({ project }: { project: Project }) {
+  if (project.coverImage) {
+    return (
+      <img
+        src={project.coverImage}
+        alt={project.title}
+        loading="lazy"
+        className="h-full w-full object-cover grayscale transition duration-700 group-hover:grayscale-0"
+      />
+    );
+  }
+
+  return (
+    <div className="flex h-full w-full items-end bg-[linear-gradient(135deg,#fafafa,#a1a1aa_48%,#18181b)] p-5">
+      <div className="h-20 w-full rounded-md border border-white/30 bg-white/40 backdrop-blur-xl" />
+    </div>
+  );
+}
+
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  // ✅ FIX: Use useMemo to cache the filtered arrays
-  const featuredProject = useMemo(
-    () => projects.find((p) => p.featured),
-    [projects]
-  );
-  const otherProjects = useMemo(
-    () => projects.filter((p) => !p.featured),
-    [projects]
-  );
   return (
     <>
-      <section
-        id="projects"
-        className="py-24 bg-gradient-to-b from-gray-50/50 to-white"
-      >
-        <div className="container mx-auto px-6 max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl md:text-6xl font-light text-gray-800">
-              Projects That Matter
-            </h2>
-            <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              I build tools that solve real problems — from crisis response to
-              sustainable living.
+      <section id="projects" className="px-6 py-24 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 flex flex-col justify-between gap-4 border-b border-zinc-300/70 pb-8 md:flex-row md:items-end">
+            <div>
+              <Badge>Selected work</Badge>
+              <h2 className="mt-4 text-4xl font-semibold tracking-normal text-zinc-950 md:text-5xl">
+                Projects with proof.
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-7 text-zinc-600">
+              Real products, public outcomes, and systems built for practical
+              use instead of portfolio decoration.
             </p>
-          </motion.div>
+          </div>
 
-          {/* Featured Hero: AidVocate */}
           {featuredProject && (
-            <motion.div
-              layoutId={featuredProject.id}
+            <button
+              type="button"
               onClick={() => setSelectedProject(featuredProject)}
-              className="group cursor-pointer mb-24 overflow-hidden rounded-3xl bg-white shadow-2xl border border-gray-100"
-              whileHover={{ scale: 1.02, zIndex: 10 }}
-              transition={{ duration: 0.4 }}
+              className="group mb-6 block w-full text-left"
             >
-              <div className="grid lg:grid-cols-2">
-                <div className="p-6 sm:p-10 lg:p-16 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4 sm:mb-6">
-                    <span className="px-4 py-1 bg-rose-100 text-rose-700 rounded-full text-xs sm:text-sm font-bold">
-                      Featured • Real-World Impact
-                    </span>
-                  </div>
-                  <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-                    {featuredProject.title}
-                  </h3>
-                  <p className="text-base sm:text-xl text-gray-700 leading-relaxed mb-6 sm:mb-8">
-                    {featuredProject.shortDesc}
-                  </p>
-                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
-                    {featuredProject.tech.slice(0, 3).map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                    {featuredProject.tech.length > 3 && (
-                      <span className="text-xs text-gray-500">
-                        +{featuredProject.tech.length - 3}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-base sm:text-lg font-semibold text-blue-600 flex items-center gap-2">
-                    Click to see how we helped Cebu in 24 hours
-                    <span className="animate-pulse">→</span>
-                  </p>
-                </div>
-
-                {/* Image Column: No changes needed here, as h-96 already sets a fixed height for mobile */}
-                <div className="relative h-96 lg:h-full min-h-96">
-                  <img
-                    src={featuredProject.coverImage}
-                    alt={featuredProject.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 text-white">
-                    <p className="text-3xl sm:text-4xl font-bold">
-                      Cebu Earthquake Response
+              <Card className="overflow-hidden p-0 transition hover:-translate-y-1 hover:shadow-[0_34px_90px_rgba(24,24,27,0.16)]">
+                <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+                  <div className="p-6 sm:p-8 lg:p-10">
+                    <Badge className="bg-zinc-950 text-white">
+                      Featured impact
+                    </Badge>
+                    <h3 className="mt-8 text-4xl font-semibold text-zinc-950 md:text-6xl">
+                      {featuredProject.title}
+                    </h3>
+                    <p className="mt-4 text-lg leading-8 text-zinc-600">
+                      {featuredProject.shortDesc}
                     </p>
-                    <p className="text-lg sm:text-xl opacity-90">
-                      October 2025
+                    <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                      {featuredProject.impactStats?.map((stat) => (
+                        <div
+                          key={stat.label}
+                          className="rounded-md border border-zinc-200 bg-zinc-50 p-3"
+                        >
+                          <stat.icon className="mb-3 h-4 w-4 text-zinc-500" />
+                          <p className="text-xl font-semibold text-zinc-950">
+                            {stat.value}
+                          </p>
+                          <p className="text-xs text-zinc-500">{stat.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-zinc-950">
+                      Read case study <ArrowUpRight size={16} />
                     </p>
                   </div>
+                  <div className="relative min-h-80 overflow-hidden">
+                    <ProjectVisual project={featuredProject} />
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </Card>
+            </button>
           )}
 
-          {/* Other Projects — Minimal & Elegant */}
-          {otherProjects.length > 0 && (
-            <>
-              <div className="text-center mb-12">
-                <h3 className="text-3xl font-light text-gray-700">
-                  More Projects
-                </h3>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {otherProjects.map((project) => (
-                  <motion.div
-                    key={project.id}
-                    layoutId={project.id}
-                    onClick={() => setSelectedProject(project)}
-                    className="group cursor-pointer bg-white rounded-2xl shadow-xl hover:shadow-2xl overflow-hidden border border-gray-100 transition duration-300"
-                    whileHover={{ y: -8, scale: 1.01 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  >
-                    <div className="relative h-48 overflow-hidden">
-                      <motion.img
-                        layoutId={`${project.id}-image`}
-                        src={project.coverImage}
-                        alt={project.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <h4 className="absolute bottom-5 left-5 text-2xl font-bold text-white">
-                        {project.title}
-                      </h4>
+          <div className="grid gap-4 md:grid-cols-3">
+            {otherProjects.map((project) => (
+              <button
+                key={project.id}
+                type="button"
+                onClick={() => setSelectedProject(project)}
+                className="group h-full text-left"
+              >
+                <Card className="flex h-full flex-col overflow-hidden p-0 transition hover:-translate-y-1">
+                  <div className="h-48 overflow-hidden">
+                    <ProjectVisual project={project} />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                      {project.subtitle}
+                    </p>
+                    <h3 className="mt-4 text-2xl font-semibold text-zinc-950">
+                      {project.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-7 text-zinc-600">
+                      {project.shortDesc}
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.tech.slice(0, 3).map((tech) => (
+                        <Badge key={tech}>{tech}</Badge>
+                      ))}
                     </div>
-
-                    <div className="p-6">
-                      <p className="text-sm text-gray-500 font-medium mb-2">
-                        {project.subtitle}
-                      </p>
-                      <p className="text-gray-700 text-sm leading-relaxed line-clamp-2 mb-4">
-                        {project.shortDesc}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.slice(0, 3).map((t) => (
-                          <span
-                            key={t}
-                            className="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded-full"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                        {project.tech.length > 3 && (
-                          <span className="text-xs text-gray-500">
-                            +{project.tech.length - 3}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </>
-          )}
+                  </div>
+                </Card>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Shared Modal*/}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -394,139 +307,123 @@ export default function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xl"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/70 p-4 backdrop-blur-xl"
           >
             <motion.div
-              layoutId={selectedProject.id}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-6xl w-full max-h-[95vh] overflow-y-auto bg-white rounded-3xl shadow-3xl"
+              initial={{ y: 24, scale: 0.98 }}
+              animate={{ y: 0, scale: 1 }}
+              exit={{ y: 24, scale: 0.98 }}
+              onClick={(event) => event.stopPropagation()}
+              className="relative max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-lg border border-zinc-200 bg-white shadow-2xl"
             >
               <button
+                type="button"
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 z-10 p-3 bg-white/90 rounded-full shadow-lg hover:bg-gray-100 transition"
+                className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/90 text-zinc-900 shadow-lg transition hover:bg-zinc-100"
+                aria-label="Close project details"
               >
-                <X className="w-6 h-6" />
+                <X size={18} />
               </button>
 
-              <div className="relative h-96">
-                <motion.img
-                  layoutId={`${selectedProject.id}-image`} // Use a unique layoutId for the image if needed
-                  src={selectedProject.coverImage}
-                  alt={selectedProject.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-10 left-10 text-white">
-                  <h1 className="text-5xl md:text-7xl font-bold mb-2">
-                    {selectedProject.title}
-                  </h1>
-                  <p className="text-2xl opacity-90">
-                    {selectedProject.subtitle}
-                  </p>
+              <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
+                <div className="min-h-80 overflow-hidden">
+                  <ProjectVisual project={selectedProject} />
                 </div>
-              </div>
 
-              <div className="p-10 lg:p-16">
-                <pre className="font-sans text-lg text-gray-700 whitespace-pre-wrap leading-relaxed mb-12">
-                  {selectedProject.fullDescription}
-                </pre>
+                <div className="p-6 sm:p-10">
+                  <Badge>{selectedProject.subtitle}</Badge>
+                  <h2 className="mt-5 text-4xl font-semibold text-zinc-950">
+                    {selectedProject.title}
+                  </h2>
+                  <p className="mt-5 text-base leading-8 text-zinc-600">
+                    {selectedProject.fullDescription}
+                  </p>
 
-                {selectedProject.impactStats && (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 my-16">
-                    {selectedProject.impactStats.map((stat) => (
-                      <div key={stat.label} className="text-center">
-                        <stat.icon className="w-12 h-12 mx-auto mb-4 text-blue-600" />
-                        <p className="text-4xl font-bold text-gray-900">
-                          {stat.value}
-                        </p>
-                        <p className="text-gray-600">{stat.label}</p>
-                      </div>
+                  <div className="mt-8 flex flex-wrap gap-2">
+                    {selectedProject.tech.map((tech) => (
+                      <Badge key={tech}>{tech}</Badge>
                     ))}
                   </div>
-                )}
 
-                <h3 className="text-3xl font-bold mb-8">Key Features</h3>
-                <ul className="grid md:grid-cols-2 gap-4 mb-12">
-                  {selectedProject.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-4">
-                      <CheckCircle className="w-6 h-6 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-lg text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                {/* Articles Section */}
-                {selectedProject.articles && (
-                  <>
-                    <h3 className="text-3xl font-bold mb-8">Media Features</h3>
+                  <h3 className="mt-10 text-sm font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                    Key features
+                  </h3>
+                  <ul className="mt-5 grid gap-3">
+                    {selectedProject.features.map((feature) => (
+                      <li
+                        key={feature}
+                        className="flex items-start gap-3 text-sm leading-7 text-zinc-700"
+                      >
+                        <CheckCircle className="mt-1 h-4 w-4 flex-shrink-0 text-zinc-950" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
 
-                    <div className="grid md:grid-cols-2 gap-6 mb-12">
-                      {selectedProject.articles.map((article) => (
-                        <a
-                          key={article.url}
-                          href={article.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group block rounded-xl overflow-hidden bg-gray-50 border hover:shadow-xl transition"
-                        >
-                          <div className="relative h-40 overflow-hidden">
-                            <img
-                              src={article.thumbnail}
-                              alt={article.title}
-                              className="object-cover w-full h-full group-hover:scale-105 transition duration-500"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                            <p className="absolute bottom-3 left-3 text-white font-semibold text-lg">
+                  {selectedProject.articles && (
+                    <div className="mt-10">
+                      <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                        Media features
+                      </h3>
+                      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                        {selectedProject.articles.map((article) => (
+                          <a
+                            key={article.url}
+                            href={article.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-md border border-zinc-200 p-4 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50"
+                          >
+                            <span className="block text-zinc-950">
                               {article.outlet}
-                            </p>
-                          </div>
-
-                          <div className="p-4">
-                            <p className="text-gray-800 font-semibold line-clamp-2">
+                            </span>
+                            <span className="mt-1 block leading-6">
                               {article.title}
-                            </p>
-                          </div>
-                        </a>
-                      ))}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
                     </div>
-                  </>
-                )}
-                {selectedProject.gallery && (
-                  <>
-                    <h3 className="text-3xl font-bold mb-8">Screenshots</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                      {selectedProject.gallery.map((img, i) => (
+                  )}
+
+                  {selectedProject.gallery && (
+                    <div className="mt-10 grid grid-cols-3 gap-3">
+                      {selectedProject.gallery.map((image, index) => (
                         <img
-                          key={i}
-                          src={img}
-                          alt={`Screenshot ${i + 1}`}
-                          className="rounded-xl object-cover w-full h-48 shadow-md hover:scale-105 transition"
+                          key={image}
+                          src={image}
+                          alt={`${selectedProject.title} screenshot ${index + 1}`}
+                          loading="lazy"
+                          className="h-24 w-full rounded-md object-cover"
                         />
                       ))}
                     </div>
-                  </>
-                )}
-
-                <div className="flex flex-wrap gap-6">
-                  {selectedProject.liveUrl && (
-                    <a
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-full hover:shadow-xl transition flex items-center gap-2"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                      Live Demo
-                    </a>
                   )}
-                  <a
-                    href={selectedProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-8 py-4 border-2 border-gray-800 text-gray-800 font-bold rounded-full hover:bg-gray-800 hover:text-white transition flex items-center gap-2"
-                  >
-                    <Github className="w-5 h-5" />
-                    Source Code
-                  </a>
+
+                  <div className="mt-10 flex flex-wrap gap-3">
+                    {selectedProject.liveUrl && (
+                      <a
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button>
+                          Live demo <ExternalLink size={16} />
+                        </Button>
+                      </a>
+                    )}
+                    {selectedProject.githubUrl && (
+                      <a
+                        href={selectedProject.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button variant="secondary">
+                          Source code <Github size={16} />
+                        </Button>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>

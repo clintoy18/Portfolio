@@ -1,75 +1,85 @@
 import React, { useState } from "react";
+import { ArrowUpRight, Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
 const Contact: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
 
-    const mailtoLink = `mailto:aicsalonzo@gmail.com?subject=Message from ${encodeURIComponent(
-      name
-    )}&body=${encodeURIComponent(
-      `${message}`
-    )}`;
+    const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`
+    );
 
-    window.location.href = mailtoLink;
+    window.location.href = `mailto:aicsalonzo@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
-    <section id="contact" className="py-24 border-t border-gray-200">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <h2 className="text-4xl font-light text-center text-gray-800 mb-16">
-          Let's Connect
-        </h2>
+    <section id="contact" className="px-6 py-24 sm:px-8">
+      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">
+            Contact
+          </p>
+          <h2 className="mt-4 text-4xl font-semibold tracking-normal text-zinc-950 md:text-5xl">
+            Building a front-end or full-stack project with real users?
+          </h2>
+          <p className="mt-5 text-sm leading-7 text-zinc-600">
+            I am open to collaborations around web apps, dashboards,
+            community-focused tools, and maintainable full-stack systems.
+          </p>
+          <a
+            href="mailto:aicsalonzo@gmail.com"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-zinc-950"
+          >
+            <Mail size={16} /> aicsalonzo@gmail.com
+          </a>
+        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white/50 backdrop-blur-xl border border-white/40 rounded-3xl p-10 shadow-xl"
         >
-          <form className="space-y-8" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-6 py-4 bg-white/60 border border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition placeholder:text-gray-500"
-              required
-            />
+          <Card className="p-5 sm:p-8">
+            <form className="grid gap-4" onSubmit={handleSubmit}>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  required
+                />
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                />
+              </div>
 
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-6 py-4 bg-white/60 border border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition placeholder:text-gray-500"
-              required
-            />
+              <Textarea
+                placeholder="Tell me what you are building"
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                required
+              />
 
-            <textarea
-              rows={6}
-              placeholder="Message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-6 py-4 bg-white/60 border border-gray-200 rounded-xl focus:outline-none focus:border-gray-400 transition resize-none placeholder:text-gray-500"
-              required
-            />
-
-            <button
-              type="submit"
-              className="w-full py-4 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition font-medium"
-            >
-              Send Message
-            </button>
-          </form>
-
-          <div className="mt-10 pt-8 border-t border-gray-200 text-center text-gray-600">
-            <p>aicsalonzo@gmail.com •</p>
-          </div>
+              <Button type="submit" className="w-full sm:w-auto">
+                Send message <ArrowUpRight size={16} />
+              </Button>
+            </form>
+          </Card>
         </motion.div>
       </div>
     </section>

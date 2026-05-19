@@ -1,112 +1,108 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
-import { Github, Linkedin } from "lucide-react";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
 
 const Hero: React.FC = () => {
-  const role = "Developer";
-  const [typed, setTyped] = useState("");
+  const roles = [
+    "Laravel and PHP developer",
+    "C# and ASP.NET builder",
+    "full-stack developer",
+  ];
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
-    let index = 0;
-    let forward = true;
+    const interval = window.setInterval(() => {
+      setRoleIndex((current) => (current + 1) % roles.length);
+    }, 2200);
 
-    const interval = setInterval(() => {
-      if (forward) {
-        setTyped(role.slice(0, index + 1));
-        index++;
-        if (index === role.length) forward = false;
-      } else {
-        index--;
-        setTyped(role.slice(0, index));
-        if (index === 0) forward = true;
-      }
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, []);
+    return () => window.clearInterval(interval);
+  }, [roles.length]);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden"
+      className="relative flex min-h-screen items-center overflow-hidden px-6 pt-28 sm:px-8"
     >
-      {/* Animated Blobs */}
-      <div className="absolute inset-0 -z-10">
-        <motion.div
-          animate={{ x: [-100, 100, -100], y: [-50, 80, -50] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute top-20 left-5 w-72 h-72 sm:w-96 sm:h-96  bg-blue-400/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ x: [100, -100, 100], y: [50, -80, 50] }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-20 right-5 w-64 h-64 sm:w-80 sm:h-80 bg-purple-400/5 rounded-full blur-3xl"
-        />
+      <div className="absolute inset-0 -z-10 opacity-80">
+        <div className="absolute left-1/2 top-20 h-72 w-72 -translate-x-1/2 rounded-full bg-white blur-3xl" />
+        <div className="absolute bottom-8 right-8 h-80 w-80 rounded-full bg-zinc-300/50 blur-3xl" />
       </div>
 
-      {/* Main layout */}
-      <div className="container mx-auto flex flex-col-reverse md:flex-row items-center px-4 sm:px-6 md:px-12">
-        {/* Left side */}
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="md:w-1/2 text-center md:text-left"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-            Hi, I’m Clint
+          <Badge className="mb-6 bg-white/70 text-zinc-700">
+            Cebu City, Philippines - open for collaboration
+          </Badge>
+
+          <h1 className="max-w-4xl text-5xl font-semibold leading-[0.98] tracking-normal text-zinc-950 sm:text-6xl lg:text-7xl">
+            Clint Alonzo builds clean full-stack systems for real community
+            impact.
           </h1>
 
-          <h2 className="text-2xl sm:text-2xl md:text-3xl font-semibold text-gray-700 mb-6">
-            Full-Stack <span className="text-blue-500">{typed}</span>
-          </h2>
-
-          <p className="text-lg sm:text-lg md:text-xl text-gray-600 mb-8">
-            Passionate about building modern applications and digital solutions
-            that make a real impact.
+          <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-600 sm:text-lg">
+            A Cebu-based {roles[roleIndex]} focused on Laravel, PHP, C#,
+            ASP.NET, MySQL, SQL, Tailwind CSS, and maintainable
+            service-repository architecture.
           </p>
 
-          {/* 🔥 Button + Socials grouped */}
-          <div className="flex flex-col items-center md:items-start gap-3 sm:gap-4">
-            <a
-              href="#projects"
-              className="inline-block px-5 py-2 sm:px-6 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-all duration-300"
-            >
-              View Work
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#projects">
+              <Button>
+                View selected work <ArrowUpRight size={16} />
+              </Button>
             </a>
+            <a href="mailto:aicsalonzo@gmail.com">
+              <Button variant="secondary">
+                <Mail size={16} /> Email me
+              </Button>
+            </a>
+          </div>
 
-            <div className="flex gap-6">
-              <a
-                href="https://github.com/clintoy18"
-                target="_blank"
-                className="text-gray-500 hover:text-gray-800 transition"
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/clint-alonzo-a4737b2b1"
-                target="_blank"
-                className="text-gray-500 hover:text-gray-800 transition"
-              >
-                <Linkedin size={20} />
-              </a>
-            </div>
+          <div className="mt-10 flex items-center gap-5">
+            <a
+              href="https://github.com/clintoy18"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="text-zinc-500 transition hover:text-zinc-950"
+            >
+              <Github size={20} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/clint-alonzo-a4737b2b1"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="text-zinc-500 transition hover:text-zinc-950"
+            >
+              <Linkedin size={20} />
+            </a>
           </div>
         </motion.div>
 
-        {/* Right side */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="md:w-1/2 flex justify-center mb-8 md:mb-0"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-lg border border-white/80 bg-[linear-gradient(135deg,#f8fafc,#a1a1aa_45%,#18181b)] p-2 shadow-[0_30px_90px_rgba(24,24,27,0.25)]"
         >
-          <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
-            <img
-              src="https://thriftit-bucket-s3.s3.ap-southeast-1.amazonaws.com/alonzo8r.JPG"
-              alt="Clint Alonzo"
-              className="w-full h-full object-cover"
-            />
+          <div className="absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.75)_38%,transparent_58%)] opacity-60" />
+          <img
+            src="https://thriftit-bucket-s3.s3.ap-southeast-1.amazonaws.com/alonzo8r.JPG"
+            alt="Portrait of Clint Alonzo"
+            className="relative h-full w-full rounded-md object-cover grayscale"
+          />
+          <div className="absolute bottom-4 left-4 right-4 rounded-md border border-white/30 bg-white/70 p-4 text-sm text-zinc-700 shadow-xl backdrop-blur-xl">
+            <p className="font-semibold text-zinc-950">Public-service tech</p>
+            <p className="mt-1">
+              Clean code, practical workflows, community-minded products.
+            </p>
           </div>
         </motion.div>
       </div>

@@ -1,160 +1,107 @@
-// components/Navbar.tsx
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "./ui/button";
+import { cn } from "../lib/utils";
 
-// Preload sections (only for links that have them)
-const preloadTechStack = () => import("./Skills"); // make sure these match your actual filenames
 const preloadProjects = () => import("./Projects");
 const preloadContact = () => import("./Contact");
+
+const navLinks = [
+  { href: "#hero", label: "Home" },
+  { href: "#skills", label: "Stack" },
+  { href: "#projects", label: "Work", preload: preloadProjects },
+  { href: "#contact", label: "Contact", preload: preloadContact },
+];
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    const handleScroll = () => setIsScrolled(window.scrollY > 12);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navLinks = [
-    { href: "#hero", label: "Home" },
-    { href: "#skills", label: "Tech Stack", preload: preloadTechStack },
-    { href: "#projects", label: "Projects", preload: preloadProjects },
-    { href: "#contact", label: "Contact", preload: preloadContact },
-  ];
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
     e.preventDefault();
-
-    const element = document.querySelector(href);
-    if (!element) return;
-
-    // Close mobile menu AFTER a short delay to allow scroll to start
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-
-      // Small delay so the menu closes smoothly AFTER scroll begins
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    } else {
-      // Desktop: scroll immediately
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    setIsMobileMenuOpen(false);
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-white/60 backdrop-blur-2xl border-b border-white/30 shadow-lg"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto max-w-5xl px-4 py-5 sm:px-6 lg:px-10 lg:py-6">
-        {" "}
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, "#hero")}
-            className="text-2xl font-semibold text-gray-800 hover:text-gray-900 transition"
-          >
-            Clint Alonzo
-          </a>
-
-          {/* Desktop Links */}
-          <ul className="hidden md:flex items-center gap-10">
-            {navLinks.map((link, i) => (
-              <motion.li
-                key={link.href}
-                initial={{ opacity: 0, y: -15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 + 0.3 }}
-              >
-                <a
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="relative text-gray-700 hover:text-gray-900 text-sm font-medium tracking-wide transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-blue-600 after:to-purple-600 after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  {link.label}
-                </a>
-              </motion.li>
-            ))}
-          </ul>
-
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-1 rounded-xl hover:bg-white/30 transition"
-            aria-label="Toggle menu"
-          >
-            <motion.div
-              animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {isMobileMenuOpen ? (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
-            </motion.div>
-          </button>
-        </div>
-        {/* Mobile Menu */}
-        <motion.div
-          initial={false}
-          animate={{
-            height: isMobileMenuOpen ? "auto" : 0,
-            opacity: isMobileMenuOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="md:hidden overflow-hidden mt-4"
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+      <nav
+        className={cn(
+          "mx-auto flex max-w-6xl items-center justify-between rounded-lg border px-4 py-3 transition",
+          isScrolled
+            ? "border-zinc-200/80 bg-white/75 shadow-[0_18px_60px_rgba(24,24,27,0.12)] backdrop-blur-xl"
+            : "border-transparent bg-transparent"
+        )}
+      >
+        <a
+          href="#hero"
+          onClick={(e) => handleNavClick(e, "#hero")}
+          className="text-sm font-semibold tracking-[0.22em] text-zinc-950"
         >
-          <div className="bg-white/70 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/40 py-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="block px-8 py-4 text-gray-800 hover:text-blue-600 hover:bg-white/40 font-medium transition-all duration-200"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </motion.nav>
+          CLINT
+        </a>
+
+        <div className="hidden items-center gap-1 md:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onMouseEnter={link.preload}
+              onFocus={link.preload}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="rounded-md px-3 py-2 text-sm font-medium text-zinc-600 transition hover:bg-zinc-950 hover:text-white"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <a
+          href="#contact"
+          onClick={(e) => handleNavClick(e, "#contact")}
+          className="hidden md:inline-flex"
+        >
+          <Button className="h-9 px-4">Start a project</Button>
+        </a>
+
+        <button
+          type="button"
+          onClick={() => setIsMobileMenuOpen((open) => !open)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-zinc-200 bg-white/70 text-zinc-900 md:hidden"
+          aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+        >
+          {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      </nav>
+
+      {isMobileMenuOpen && (
+        <div className="mx-auto mt-2 max-w-6xl rounded-lg border border-zinc-200 bg-white/90 p-2 shadow-2xl backdrop-blur-xl md:hidden">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onMouseEnter={link.preload}
+              onFocus={link.preload}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="block rounded-md px-4 py-3 text-sm font-medium text-zinc-700 hover:bg-zinc-100"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
   );
 };
 

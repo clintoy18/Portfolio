@@ -1,112 +1,74 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Card } from "./ui/card";
+import { Badge } from "./ui/badge";
+
+const skillCategories = [
+  {
+    title: "Frontend Craft",
+    note: "Responsive interfaces with practical UI structure and clean Tailwind systems.",
+    skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS"],
+  },
+  {
+    title: "Backend Systems",
+    note: "Maintainable full-stack foundations using service-repository patterns.",
+    skills: ["Laravel", "PHP", "C#", "ASP.NET", "MySQL", "SQL"],
+  },
+  {
+    title: "Impact Work",
+    note: "Projects shaped around public service, school workflows, and community needs.",
+    skills: ["Git", "Vite", "AWS S3", "Vercel", "Clean Code"],
+  },
+];
 
 const Skills: React.FC = () => {
-  const skillCategories = [
-    {
-      title: "Frontend",
-      skills: ["HTML + CSS", "React", "TypeScript", "Tailwind CSS"],
-    },
-    {
-      title: "Backend",
-      skills: ["Laravel", "PHP", "ASP.NET", "Node.js"],
-    },
-    {
-      title: "Tools & Others",
-      skills: ["Git", "MySQL", "SQL", "Prisma"],
-    },
-  ];
-
-  // Animation variants for the container
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
-  };
-
-  // Animation variants for individual cards
-  // Animation variants for individual cards
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring", // TypeScript now sees this as the literal "spring"
-        stiffness: 100,
-        damping: 12,
-      },
-    },
-  } as const; // <--- Add this right here
-
   return (
-    <section
-      id="skills"
-      className="relative py-24 bg-[#FCFCFC] overflow-hidden"
-    >
-      {/* Decorative subtle background element */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-30 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-gray-200 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-slate-100 blur-[120px]" />
-      </div>
-
-      <div className="container relative z-10 mx-auto px-6">
-        <div className="text-center mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900"
-          >
-            Tech Stack
-          </motion.h2>
-          <div className="mt-4 h-1 w-12 bg-gray-900 mx-auto rounded-full" />
+    <section id="skills" className="px-6 py-24 sm:px-8">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-10 flex flex-col justify-between gap-4 border-b border-zinc-300/70 pb-8 md:flex-row md:items-end">
+          <div>
+            <Badge>Capabilities</Badge>
+            <h2 className="mt-4 text-4xl font-semibold tracking-normal text-zinc-950 md:text-5xl">
+              Lean stack. Strong execution.
+            </h2>
+          </div>
+          <p className="max-w-md text-sm leading-7 text-zinc-600">
+            I focus on clean, maintainable code and useful products for
+            real-world workflows, especially education, public service, and
+            community impact.
+          </p>
         </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10 max-w-6xl mx-auto"
-        >
-          {skillCategories.map((category) => (
+        <div className="grid gap-4 md:grid-cols-3">
+          {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
-              variants={cardVariants}
-              whileHover={{ y: -8 }}
-              className="relative p-8 rounded-3xl border border-gray-200/60 bg-white/70 backdrop-blur-md shadow-sm hover:shadow-2xl hover:shadow-gray-200/40 transition-all duration-500"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
             >
-              <div className="flex items-center justify-between mb-8">
-                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">
+              <Card className="h-full p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                  0{index + 1}
+                </p>
+                <h3 className="mt-6 text-xl font-semibold text-zinc-950">
                   {category.title}
                 </h3>
-                <div className="h-[1px] flex-grow ml-4 bg-gray-100" />
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                {category.skills.map((skill) => (
-                  <motion.span
-                    key={skill}
-                    whileHover={{ scale: 1.05 }}
-                    className="px-5 py-2.5 bg-white border border-gray-100 rounded-2xl text-[13px] font-semibold text-gray-700 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:border-gray-900 hover:text-gray-900 transition-colors cursor-default"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-
-              {/* Minimalist dot pattern for texture */}
-              <div className="absolute bottom-4 right-4 grid grid-cols-2 gap-1 opacity-20">
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="w-1 h-1 bg-gray-400 rounded-full" />
-                ))}
-              </div>
+                <p className="mt-3 min-h-20 text-sm leading-7 text-zinc-600">
+                  {category.note}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <Badge key={skill} className="bg-white">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </Card>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

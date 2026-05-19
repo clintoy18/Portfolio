@@ -1,28 +1,36 @@
-// components/Footer.tsx
 import React from "react";
 import { Github, Linkedin } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative border-t border-gray-200 bg-white/30 backdrop-blur-xl">
-      <div className="container mx-auto px-6 py-10 text-center">
-        <p className="text-sm text-gray-600 font-light tracking-wide">
-          © {new Date().getFullYear()} Clint Alonzo. Crafted with care.
+    <footer className="px-6 py-10 sm:px-8">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 border-t border-zinc-300/70 pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm text-zinc-500">
+          © {new Date().getFullYear()} Clint Alonzo. Built with React,
+          TypeScript, and care for the details.
         </p>
 
-        {/* Optional: tiny social icons (uncomment if you want) */}
-        <div className="mt-6 flex justify-center gap-8">
-          <a href="https://github.com/clintoy18" className="text-gray-500 hover:text-gray-800 transition">
-            <Github size={20} />
+        <div className="flex gap-4">
+          <a
+            href="https://github.com/clintoy18"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile"
+            className="text-zinc-500 transition hover:text-zinc-950"
+          >
+            <Github size={19} />
           </a>
-          <a href="https://www.linkedin.com/in/clint-alonzo-a4737b2b1/?originalSubdomain=ph" className="text-gray-500 hover:text-gray-800 transition">
-            <Linkedin size={20} />
+          <a
+            href="https://www.linkedin.com/in/clint-alonzo-a4737b2b1/?originalSubdomain=ph"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile"
+            className="text-zinc-500 transition hover:text-zinc-950"
+          >
+            <Linkedin size={19} />
           </a>
         </div>
       </div>
-
-      {/* Subtle bottom gradient fade (optional luxury touch) */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
     </footer>
   );
 };
