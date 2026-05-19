@@ -94,7 +94,7 @@ const Hero: React.FC = () => {
         >
           <div className="absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.75)_38%,transparent_58%)] opacity-60" />
           <img
-            src="https://thriftit-bucket-s3.s3.ap-southeast-1.amazonaws.com/alonzo8r.JPG"
+            src="/portrait.jpg"
             alt="Portrait of Clint Alonzo"
             className="relative h-full w-full rounded-md object-cover grayscale"
           />
