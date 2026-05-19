@@ -145,7 +145,7 @@ const projects: Project[] = [
     shortDesc:
       "A workspace booking experience with landing pages, role-based dashboards, cashier seat selection, booking timers, expiration alerts, and printable receipts.",
     tech: ["React", "TypeScript", "Vite", "shadcn-ui", "Tailwind", "Vitest"],
-    liveUrl: "https://shift-workspace-launch.vercel.app",
+    liveUrl: "https://shiftworkingspace.com",
     githubUrl: "https://github.com/clintoy18/shift-workspace-launch",
     fullDescription:
       "Shift Workspace is a coworking space product prototype built with React, TypeScript, shadcn-ui, and Tailwind. It includes a public marketing site plus protected customer, admin, and cashier areas. The cashier flow manages seat bookings, pricing, timers, expiring-seat notifications, confirmation modals, and receipt printing.",
@@ -182,6 +182,20 @@ const projects: Project[] = [
 const featuredProject = projects.find((project) => project.featured);
 const otherProjects = projects.filter((project) => !project.featured);
 
+function projectLabel(project: Project) {
+  const url = project.liveUrl ?? project.githubUrl;
+
+  if (!url) {
+    return project.tech.slice(0, 2).join(" / ");
+  }
+
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
 function ProjectVisual({ project }: { project: Project }) {
   if (project.coverImage) {
     return (
@@ -206,7 +220,7 @@ export default function Projects() {
 
   return (
     <>
-      <section id="projects" className="px-6 py-24 sm:px-8">
+      <section id="projects" className="px-6 pb-24 pt-12 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 flex flex-col justify-between gap-4 border-b border-zinc-300/70 pb-8 md:flex-row md:items-end">
             <div>
@@ -265,38 +279,42 @@ export default function Projects() {
             </button>
           )}
 
-          <div className="grid gap-4 md:grid-cols-3">
-            {otherProjects.map((project) => (
-              <button
-                key={project.id}
-                type="button"
-                onClick={() => setSelectedProject(project)}
-                className="group h-full text-left"
+          <Card className="p-5 sm:p-6">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <h3 className="text-2xl font-semibold text-zinc-950">
+                Recent Projects
+              </h3>
+              <a
+                href="https://github.com/clintoy18"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 transition hover:text-zinc-950"
               >
-                <Card className="flex h-full flex-col overflow-hidden p-0 transition hover:-translate-y-1">
-                  <div className="h-48 overflow-hidden">
-                    <ProjectVisual project={project} />
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">
-                      {project.subtitle}
-                    </p>
-                    <h3 className="mt-4 text-2xl font-semibold text-zinc-950">
-                      {project.title}
-                    </h3>
-                    <p className="mt-3 flex-1 text-sm leading-7 text-zinc-600">
-                      {project.shortDesc}
-                    </p>
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {project.tech.slice(0, 3).map((tech) => (
-                        <Badge key={tech}>{tech}</Badge>
-                      ))}
-                    </div>
-                  </div>
-                </Card>
-              </button>
-            ))}
-          </div>
+                View All <ArrowUpRight size={14} />
+              </a>
+            </div>
+
+            <div className="grid border-t border-l border-zinc-100 sm:grid-cols-2">
+              {otherProjects.map((project) => (
+                <button
+                  key={project.id}
+                  type="button"
+                  onClick={() => setSelectedProject(project)}
+                  className="group min-h-32 border-r border-b border-zinc-100 bg-white/45 p-5 text-left transition hover:bg-zinc-50"
+                >
+                  <h4 className="text-lg font-semibold leading-6 text-zinc-950">
+                    {project.title}
+                  </h4>
+                  <p className="mt-2 line-clamp-1 text-sm leading-6 text-zinc-700">
+                    {project.subtitle}
+                  </p>
+                  <span className="mt-3 inline-flex max-w-full rounded-sm bg-zinc-100 px-2.5 py-1 font-mono text-xs text-zinc-700">
+                    <span className="truncate">{projectLabel(project)}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          </Card>
         </div>
       </section>
 
